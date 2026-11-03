@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://apps.adeleon.dev/schema/app.schema.json",
+  "title": "Instala app manifest (.instala.yml)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "tagline",
+    "category",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{1,31}$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 140
+    },
+    "category": {
+      "enum": [
+        "dev",
+        "net",
+        "radio",
+        "read",
+        "media",
+        "system",
+        "other"
+      ]
+    },
+    "status": {
+      "enum": [
+        "preview",
+        "active",
+        "maintenance",
+        "archived"
+      ]
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "iconPng": {
+      "type": "string",
+      "pattern": "\\.png$"
+    },
+    "screenshots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "alt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "packages": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "homebrew": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+$"
+        },
+        "winget": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9]+\\.[A-Za-z0-9.]+$"
+        }
+      }
+    }
+  }
+}

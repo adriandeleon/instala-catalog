@@ -1,0 +1,18 @@
+# Staged here until it is committed to the torrenta repository as .instala.yml.
+id: torrenta
+name: Torrenta
+tagline: BitTorrent client with transfers, search and RSS in one window.
+category: net
+status: active
+color: "#4F63C9"
+keywords: [bittorrent, torrent, rss, download, magnet]
+icon: branding/torrenta-icon.svg
+iconPng: branding/torrenta.png
+screenshots:
+  - path: docs/screenshot.png
+    alt: The transfer list with filters, and a detail pane showing pieces, speed graph and peers.
+homepage: https://torrenta-project.dev
+# jreleaser.yml is set up for both, but adriandeleon/homebrew-tap has no cask yet.
+# packages:
+#   homebrew: adriandeleon/tap/torrenta
+#   winget: AdrianDeLeon.Torrenta

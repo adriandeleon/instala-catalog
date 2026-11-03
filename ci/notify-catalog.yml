@@ -1,0 +1,29 @@
+# Paste this job at the end of an app's .github/workflows/release.yml, after the publish job.
+#
+# It asks the catalog repository to rebuild now instead of at its next daily run. It needs a token
+# that can write to that repository: a fine-grained token limited to adriandeleon/instala-catalog
+# with "Contents: read and write", stored as the CATALOG_TOKEN secret. The token that JReleaser uses
+# for the Homebrew tap works too if it covers that repository.
+#
+# Failing here never fails the release: the daily rebuild picks the release up anyway.
+
+  notify-catalog:
+    name: Tell the catalog
+    needs: publish            # the job that creates the GitHub release
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions: {}
+    steps:
+      - name: Send repository_dispatch
+        env:
+          GH_TOKEN: ${{ secrets.CATALOG_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::CATALOG_TOKEN is not set; the catalog picks this release up at its daily rebuild"
+            exit 0
+          fi
+          gh api repos/adriandeleon/instala-catalog/dispatches \
+            -f event_type=app-released \
+            -f "client_payload[repo]=${{ github.repository }}" \
+            -f "client_payload[tag]=${{ github.ref_name }}"

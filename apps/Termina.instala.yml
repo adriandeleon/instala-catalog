@@ -1,0 +1,19 @@
+# Staged here until it is committed to the Termina repository as .instala.yml.
+id: termina
+name: Termina
+tagline: Terminal emulator that runs a real shell on a pseudo-terminal and draws to a canvas.
+category: dev
+status: active
+color: "#6563C4"
+keywords: [terminal, shell, console, pty, command line]
+icon: branding/termina-icon.svg
+iconPng: src/main/resources/com/termina/icons/icon-256.png
+screenshots:
+  - path: docs/screenshot.png
+    alt: Two tabs and a colorized directory listing in a shell session.
+homepage: https://termina-project.dev
+# jreleaser.yml is set up for both, but adriandeleon/homebrew-tap has no cask yet.
+# Uncomment each one once it has actually published.
+# packages:
+#   homebrew: adriandeleon/tap/termina
+#   winget: AdrianDeLeon.Termina

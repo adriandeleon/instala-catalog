@@ -1,0 +1,11 @@
+# Staged here until it is committed to the Editora repository as .instala.yml.
+id: editora
+name: Editora
+tagline: Programmer's editor with IDE features that stay hidden until you need them.
+category: dev
+status: active
+color: "#1F8F84"
+keywords: [editor, code, text, programming, ide]
+icon: branding/editora-icon.svg
+iconPng: src/main/resources/com/editora/icons/icon-256.png
+homepage: https://editora-project.dev

@@ -1,0 +1,66 @@
+# Rebuild catalog.json from the apps' releases and publish it with GitHub Pages.
+#
+# Runs when an app's release workflow says it has published (repository_dispatch, see
+# ci/notify-catalog.yml), once a day in case such a call was missed, on a push that changes the
+# registry, a staged manifest, a schema or the builder, and by hand.
+name: Build catalog
+
+on:
+  repository_dispatch:
+    types: [app-released]
+  schedule:
+    - cron: '17 6 * * *'
+  push:
+    branches: [main]
+    paths: ['registry.yml', 'apps/**', 'schema/**', 'tools/**', '.github/workflows/build-catalog.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One build at a time; a newer release makes an older queued build pointless.
+concurrency:
+  group: catalog
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install builder dependencies
+        run: pip install --quiet pyyaml==6.0.2 jsonschema==4.23.0
+
+      - name: Build
+        env:
+          # Read-only access to public repositories is enough. The workflow token lifts the rate limit.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/build_catalog.py --out site
+          cp -r schema site/schema
+          cat site/CONFORMANCE.md >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "Triggered by ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.tag }}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

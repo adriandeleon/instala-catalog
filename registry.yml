@@ -1,0 +1,25 @@
+# Repositories in the catalog, in the order the home page shows them.
+# Adding an app: add its repository here (or give it the topic below) and tag a release.
+owner: adriandeleon
+discover_topic: instala-app   # repositories with this topic are added automatically
+repos:
+  - Editora
+  - Termina
+  - torrenta
+  - nux
+  - Modula
+  - insula
+  - Calcula
+
+publisher:
+  name: Adrián De León
+  url: https://www.adeleon.dev
+
+categories:
+  - { id: dev, name: Dev tools }
+  - { id: net, name: Network }
+  - { id: radio, name: Radio & hardware }
+  - { id: read, name: Reading }
+  - { id: media, name: Media }
+  - { id: system, name: System }
+  - { id: other, name: Other }

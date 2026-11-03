@@ -1,0 +1,15 @@
+# Staged here until it is committed to the Modula repository as .instala.yml.
+id: modula
+name: Modula
+tagline: AM/FM broadcast receiver for RTL-SDR dongles, with stereo and RDS.
+category: radio
+status: active
+color: "#D0661A"
+keywords: [radio, fm, am, rds, sdr, rtl-sdr, receiver]
+icon: branding/modula-icon.svg
+iconPng: branding/modula-icon-256.png
+screenshots:
+  - path: docs/screenshot.png
+    alt: Tuned to 106.9 MHz, with a live spectrum, presets and stereo controls.
+requires:
+  - An RTL-SDR USB dongle.

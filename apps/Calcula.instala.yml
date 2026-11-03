@@ -1,0 +1,10 @@
+# Staged here until it is committed to the Calcula repository as .instala.yml.
+id: calcula
+name: Calcula
+tagline: "Symbolic calculator in the spirit of Emacs Calc: algebra, calculus, typeset math and plots."
+category: dev
+status: maintenance
+color: "#2F68D0"
+keywords: [calculator, math, algebra, calculus, symja, plot]
+icon: branding/calcula-icon.svg
+iconPng: branding/calcula.png

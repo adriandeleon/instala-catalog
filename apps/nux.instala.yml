@@ -1,0 +1,15 @@
+# Staged here until it is committed to the nux repository as .instala.yml.
+id: nux
+name: Nux
+tagline: Live dashboard, history and power-event alerts for Network UPS Tools.
+category: net
+status: active
+color: "#B57C00"
+keywords: [ups, power, battery, nut, network ups tools, monitor]
+icon: branding/nux.svg
+iconPng: branding/nux-256.png
+screenshots:
+  - path: docs/screenshot.png
+    alt: The UPS dashboard showing battery charge, load, runtime, voltage history and device variables.
+requires:
+  - A NUT server on your network.

@@ -1,0 +1,5 @@
+# Builder output. CI publishes it with GitHub Pages; it is not kept in the repository.
+/site/
+/catalog.json
+/CONFORMANCE.md
+__pycache__/
